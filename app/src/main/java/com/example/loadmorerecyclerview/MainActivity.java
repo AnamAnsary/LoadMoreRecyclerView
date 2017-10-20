@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private List<MstStudents> students;
     private StudentAdapter studentAdapter;
     private static final String TAG = "MainActivity";
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +44,11 @@ public class MainActivity extends AppCompatActivity {
             students.add(stu);
 
         }
-
+        //loadData();
 
         //find view by id and attaching adapter for the RecyclerView
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         studentAdapter = new StudentAdapter(recyclerView, students, this);
         recyclerView.setAdapter(studentAdapter);
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                             int index = students.size();
                             int end = index + 10;
 
-                            List<MstStudents> student = db.getStudents(end);
+                            List<MstStudents> student = db.getStudents(index);
                             for (MstStudents stu : student) {
                                 String log = "Id: " +stu.getId() + " ,Name: " + stu.getStudname() + " ,R.No.: " +stu.getRollno();
                                 Log.w(TAG, "student is : " +log);
@@ -85,5 +86,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void loadData() {
+
+        for (int i = 1; i <= 20; i++) {
+            students.add(new MstStudents("name " +i,(i+1)));
+        }
+
     }
 }

@@ -16,8 +16,9 @@ import java.util.List;
  */
 
 public class StudentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private final int VIEW_TYPE_ITEM = 0;
-    private final int VIEW_TYPE_LOADING = 1;
+
+    private final int VIEW_TYPE_ITEM = 1;
+    private final int VIEW_TYPE_LOADING = 0;
     private OnLoadMoreListener onLoadMoreListener;
     private boolean isLoading;
     private Activity activity;
